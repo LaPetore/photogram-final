@@ -79,10 +79,25 @@
   </dd>
 
   <dt>
-    
+    Edit photo
   </dt>
+  <dd>
+    <form action="/update_photo/<%= @the_photo.id %>" method="post">
+      <label for="image_box">Image URL</label>
+      <input id="image_box" type="file" name="query_image">
+
+      <label for="caption_box">Caption</label>
+      <textarea id="caption_box" type="text" name="query_caption"><%= @the_photo.caption %></textarea>
+
+      <button>Update photo</button>
+    </form>
   </dd>
 
+  <dt>
+    Delete photo
+  </dt>
+  <dd>
+    <a href="/delete_photo/<%= @the_photo.id %>">Delete this photo</a>
   </dd>
 </dl>
 
