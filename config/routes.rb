@@ -14,8 +14,6 @@ Rails.application.routes.draw do
   # DELETE RECORD
   get("/cancel_user_account", { :controller => "user_authentication", :action => "destroy" })
 
-  # ------------------------------
-
   # SIGN IN FORM
   get("/user_sign_in", { :controller => "user_authentication", :action => "sign_in_form" })
   # AUTHENTICATE AND STORE COOKIE
@@ -24,9 +22,9 @@ Rails.application.routes.draw do
   # SIGN OUT        
   get("/user_sign_out", { :controller => "user_authentication", :action => "destroy_cookies" })
              
-  #------------------------------
+  
 
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
 
 
 
