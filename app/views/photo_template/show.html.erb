@@ -42,7 +42,8 @@
     Comments count
   </dt>
   <dd>
-    <%= @the_photo.comments_count %>
+    <% x = Comment.where({ :photo_id => @the_photo.id }) %>
+    <%= x.count %>
   </dd>
 
   <dt>
@@ -56,7 +57,13 @@
     Add a fan
   </dt>
   <dd>
-    Like
+    <form action="/create_like" method="post">
+      <input type="hidden" name="query_fan_id" value="<%= session.fetch(:user_id) %>">
+
+      <input type="hidden" name="query_photo_id" value="<%= @the_photo.id %>">
+
+      <button>Like</button>
+    </form>
   </dd>
 </dl>
 
@@ -96,7 +103,7 @@
 
 <form action="/create_comment" method="post">
   <label for="comment_box">Comment</label>
-  <textarea type="comment_box" placeholder="Enter a comment..." name="query_body"></textarea>
+  <textarea id="comment_box" type="text" placeholder="Enter a comment..." name="query_body"></textarea>
 
   <input type="hidden" name="query_author_id" value="<%= session.fetch(:user_id) %>">
 

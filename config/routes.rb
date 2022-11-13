@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  # Routes fo the Likes account:
+
+  # CREATE
+
+  post("/create_like", { :controller => "likes", :action => "create" })
+
+
+
+
+
+
+
   # Routes for the User account:
 
   # READ 
