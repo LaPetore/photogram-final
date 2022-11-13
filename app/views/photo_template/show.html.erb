@@ -78,27 +78,29 @@
     <% end %>
   </dd>
 
-  <dt>
-    Edit photo
-  </dt>
-  <dd>
-    <form action="/update_photo/<%= @the_photo.id %>" method="post">
-      <label for="image_box">Image URL</label>
-      <input id="image_box" type="file" name="query_image">
+  <% if session.fetch(:user_id) == @the_photo.owner_id %>
+    <dt>
+      Edit photo
+    </dt>
+    <dd>
+      <form action="/update_photo/<%= @the_photo.id %>" method="post">
+        <label for="image_box">Image URL</label>
+        <input id="image_box" type="file" name="query_image">
 
-      <label for="caption_box">Caption</label>
-      <textarea id="caption_box" type="text" name="query_caption"><%= @the_photo.caption %></textarea>
+        <label for="caption_box">Caption</label>
+        <textarea id="caption_box" type="text" name="query_caption"><%= @the_photo.caption %></textarea>
 
-      <button>Update photo</button>
-    </form>
-  </dd>
+        <button>Update photo</button>
+      </form>
+    </dd>
 
-  <dt>
-    Delete photo
-  </dt>
-  <dd>
-    <a href="/delete_photo/<%= @the_photo.id %>">Delete this photo</a>
-  </dd>
+    <dt>
+      Delete photo
+    </dt>
+    <dd>
+      <a href="/delete_photo/<%= @the_photo.id %>">Delete this photo</a>
+    </dd>
+  <% end %>
 </dl>
 
 

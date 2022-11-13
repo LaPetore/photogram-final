@@ -13,6 +13,16 @@ Rails.application.routes.draw do
 
 
 
+  # Routes for the FollowRequests account:
+
+  # CREATE 
+
+  post("/insert_follow_request", { :controller => "follow_requests", :action => "create" })
+
+
+
+
+
 
 
   # Routes for the User account:
@@ -20,6 +30,8 @@ Rails.application.routes.draw do
   # READ 
 
   get("/", { :controller => "users", :action => "index" })
+
+  get("/users/:path_username", { :controller => "users", :action => "show" })
 
   # SIGN UP FORM
   get("/user_sign_up", { :controller => "user_authentication", :action => "sign_up_form" })        
