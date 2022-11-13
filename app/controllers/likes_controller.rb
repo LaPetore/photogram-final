@@ -13,5 +13,12 @@ class LikesController < ApplicationController
     end
   end
 
+  def delete 
+    the_id = params.fetch("path_id")
+    the_like = Like.where({ :id => the_id }).at(0)
+    
+    the_like.destroy
 
+    redirect_to("/photos", { :notice => "You have unliked this photo." })
+  end
 end 

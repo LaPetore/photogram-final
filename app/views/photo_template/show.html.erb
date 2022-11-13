@@ -20,8 +20,8 @@
     Owner
   </dt>
   <dd>
-    <% x = User.where({ :id => @the_photo.owner_id }) %>
-    <%= x.at(0).username %>
+    <% a = User.where({ :id => @the_photo.owner_id }) %>
+    <%= a.at(0).username %>
   </dd>
 
   <dt>
@@ -35,15 +35,16 @@
     Likes count
   </dt>
   <dd>
-    <%= @the_photo.likes_count %>
+    <% b = Like.where({ :photo_id => @the_photo.id }) %>
+    <%= b.count %>
   </dd>
 
   <dt>
     Comments count
   </dt>
   <dd>
-    <% x = Comment.where({ :photo_id => @the_photo.id }) %>
-    <%= x.count %>
+    <% c = Comment.where({ :photo_id => @the_photo.id }) %>
+    <%= c.count %>
   </dd>
 
   <dt>
@@ -57,14 +58,31 @@
     Add a fan
   </dt>
   <dd>
-    <form action="/create_like" method="post">
-      <input type="hidden" name="query_fan_id" value="<%= session.fetch(:user_id) %>">
 
-      <input type="hidden" name="query_photo_id" value="<%= @the_photo.id %>">
+    <%# PAY ATTENTION TO THIS! IT IS SIMILAR TO THE BOOKMARKS IN MSM SIGN-IN %>
 
-      <button>Like</button>
-    </form>
+    <% if @current_user != nil %>
+    <% current_user_likes = Like.where({ :fan_id => session.fetch(:user_id) }).where({ :photo_id => @the_photo.id }) %>
+      <% the_like = current_user_likes.at(0) %>
+      <% if the_like == nil %>
+        <form action="/create_like" method="post">
+          <input type="hidden" name="query_fan_id" value="<%= session.fetch(:user_id) %>">
+
+          <input type="hidden" name="query_photo_id" value="<%= @the_photo.id %>">
+
+          <button>Like</button>
+      <% else %>
+          <a href="/delete_like/<%= the_like.id %>">Unlike</a>
+        </form>
+      <% end %>
+    <% end %>
   </dd>
+
+
+
+
+
+
 </dl>
 
 

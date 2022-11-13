@@ -5,6 +5,10 @@ Rails.application.routes.draw do
 
   post("/create_like", { :controller => "likes", :action => "create" })
 
+  # DELETE
+
+  get("/delete_like/:path_id", { :controller => "likes", :action => "delete" })
+
 
 
 
