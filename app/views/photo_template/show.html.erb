@@ -25,6 +25,13 @@
   </dd>
 
   <dt>
+    Posted 
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@the_photo.created_at) %> ago
+  </dd>
+
+  <dt>
     Likes count
   </dt>
   <dd>
@@ -51,5 +58,36 @@
   <dd>
     Like
   </dd>
-
 </dl>
+
+
+<h2>Comments</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <th>Commenter</th>
+      <th>Comment</th>
+      <th>Posted</th>
+    </tr>
+
+    <% x = Comment.where({ :photo_id => @the_photo.id }) %>
+    <% x.each do |a_comment| %>
+    <tr>
+      <td>
+        <% y = User.where({ :id => a_comment.author_id }) %>
+        <%= y.at(0).username %>
+      </td>
+
+      <td>
+        <%= a_comment.body %>
+      </td>
+
+      <td>
+        <%= time_ago_in_words(a_comment.created_at) %>
+      </td>
+
+    </tr>
+    <% end %>
+  </tbody>
+</table>
