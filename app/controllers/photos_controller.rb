@@ -6,5 +6,11 @@ class PhotosController < ApplicationController
     render({ :template => "/photo_template/index.html.erb" })
   end
 
+  def show
+    the_id = params.fetch("path_id")
+    matching_photos = Photo.where({ :id => the_id })
+
+    render({ :template => "/photo_template/show.html.erb" })
+  end
 
 end 
