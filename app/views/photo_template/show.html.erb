@@ -1,9 +1,55 @@
 <h1>Photo Details</h1>
 
+
 <dl>
   <dt>
     Image
   </dt>
+  <dd>
+    <img src="<%= @the_photo.image %>">
+  </dd>
 
+  <dt>
+    Caption
+  </dt>
+  <dd>
+    <%= @the_photo.caption %>
+  </dd>
+
+  <dt>
+    Owner
+  </dt>
+  <dd>
+    <% x = User.where({ :id => @the_photo.owner_id }) %>
+    <%= x.at(0).username %>
+  </dd>
+
+  <dt>
+    Likes count
+  </dt>
+  <dd>
+    <%= @the_photo.likes_count %>
+  </dd>
+
+  <dt>
+    Comments count
+  </dt>
+  <dd>
+    <%= @the_photo.comments_count %>
+  </dd>
+
+  <dt>
+    Fans 
+  </dt>
+  <dd>
+    (list of people later)
+  </dd>
+
+  <dt>
+    Add a fan
+  </dt>
+  <dd>
+    Like
+  </dd>
 
 </dl>
