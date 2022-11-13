@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   # Routes for the User account:
 
+  # READ 
+
+  get("/", { :controller => "users", :action => "index" })
+
   # SIGN UP FORM
   get("/user_sign_up", { :controller => "user_authentication", :action => "sign_up_form" })        
   # CREATE RECORD
@@ -24,10 +28,13 @@ Rails.application.routes.draw do
              
   
 
+  # Routes for the Photo account:
+
+  # READ 
+
+  get("/photos", { :controller => "photos", :action => "index" })
 
 
 
 
-
-  
 end
