@@ -91,3 +91,16 @@
     <% end %>
   </tbody>
 </table>
+
+<h3>Add a new comment</h3>
+
+<form action="/create_comment" method="post">
+  <label for="comment_box">Comment</label>
+  <textarea type="comment_box" placeholder="Enter a comment..." name="query_body"></textarea>
+
+  <input type="hidden" name="query_author_id" value="<%= session.fetch(:user_id) %>">
+
+  <input type="hidden" name="query_photo_id" value="<%= @the_photo.id %>">
+
+  <button>Add comment</button>
+</form>

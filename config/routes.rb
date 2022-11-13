@@ -38,5 +38,16 @@ Rails.application.routes.draw do
 
 
 
+  # Routes for the Comment account:
+
+  # CREATE 
+
+  post("/create_comment", { :controller => "comments", :action => "create" })
+
+  
+
+  
+
+
 
 end
