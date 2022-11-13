@@ -14,4 +14,19 @@ class PhotosController < ApplicationController
     render({ :template => "/photo_template/show.html.erb" })
   end
 
+  def create
+    the_photo = Photo.new
+    the_photo.image = params.fetch("query_image")
+    the_photo.caption = params.fetch("query_caption")
+    the_photo.owner_id = params.fetch("query_owner_id")
+
+    if the_photo.valid? 
+      the_photo.save 
+
+      redirect_to("/photos", { :notice => "Photo successfully created." })
+    else 
+      redirect_to("/photos", { :alert => "Photo did not create successfully." })
+    end
+  end
+
 end 

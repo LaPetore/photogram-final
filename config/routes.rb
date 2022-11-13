@@ -52,6 +52,11 @@ Rails.application.routes.draw do
 
   get("/photos/:path_id", { :controller => "photos", :action => "show" })
 
+  # CREATE
+
+  get("/create_photo", { :controller => "photos", :action => "create" })
+
+
 
 
   # Routes for the Comment account:

@@ -1,5 +1,19 @@
 <h1>List of photos</h1>
 
+<form action="/create_photo">
+  <label for="image_box">Image</label>
+  <input id="image_box" type="file" name="query_image">
+
+  <label for="caption_box">Caption</label>
+  <textarea id="caption_box" type="text" name="query_caption" placeholder="Enter a caption for the photo..."></textarea>
+
+  <input type="hidden" name="query_owner_id" value="<%= @current_user.id %>">
+
+  <button>Add photo</button>
+</form>
+
+<hr>
+
 <table border="1">
   <tr>
     <th>Image</th>
@@ -30,7 +44,8 @@
       </td>
 
       <td>
-        <%= a_photo.likes_count %>
+        <% y = Like.where({ :photo_id => a_photo.id }) %>
+        <%= y.count %>
       </td>
 
       <td>
