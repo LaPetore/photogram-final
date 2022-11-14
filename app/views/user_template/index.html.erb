@@ -23,33 +23,25 @@
       </td>
 
       <td>
-        <% %>
-
-
-        <% if session.fetch(:user_id) != nil%>
-
+      
+        <% if session.fetch(:user_id) != nil %>
+          <% a = FollowRequest.where({ :recipient_id => a_user.id, :sender_id => @current_user.id , status: "pending" }) %>
+          <% the_following_request = a.at(0) %>
         
-
-          <% if a_user.private? %>
-
-            <form action="/insert_follow_request" method="post">
-              <input type="hidden" name="query_status" value="pending">
-              <input type="hidden" name="query_recipient_id" value="<%= a_user.id %>">
-              <input type="hidden" name="query_sender_id" value="<%= @current_user.id %>">
-             
-              <button>Follow</button>
-            </form>
+          <% if the_following_request != nil %>
+            Request sent. <a href="/delete_follow_request/<%= the_following_request.id %>">Cancel</a>
             
           <% else %>
+
             <form action="/insert_follow_request" method="post">
-              <input type="hidden" name="query_status" value="accepted">
               <input type="hidden" name="query_recipient_id" value="<%= a_user.id %>">
               <input type="hidden" name="query_sender_id" value="<%= @current_user.id %>">
              
               <button>Follow</button>
             </form>
-          <% end %>
-        <% end%>
+          
+          <% end%>
+        <% end %>
       </td>
 
       <td>
