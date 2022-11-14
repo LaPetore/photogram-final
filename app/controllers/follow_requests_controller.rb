@@ -14,4 +14,13 @@ class FollowRequestsController < ApplicationController
     end
   end
 
+  def delete 
+    the_id = params.fetch("path_id")
+    the_request = FollowRequest.where({ :id => the_id })
+
+    the_request.destroy 
+
+    redirect_to("/", { :notice => "Follow request cancelled." })
+  end
+
 end

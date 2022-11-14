@@ -19,13 +19,17 @@ Rails.application.routes.draw do
 
   post("/insert_follow_request", { :controller => "follow_requests", :action => "create" })
 
+  # DELETE 
+
+  get("/delete_follow_request/:path_id", { :controller => "follow_requests", :action => "delete" })
 
 
 
 
 
 
-  # Routes for the User account:
+
+  # Routes for the USER account:
 
   # READ 
 
@@ -56,7 +60,7 @@ Rails.application.routes.draw do
              
   
 
-  # Routes for the Photo account:
+  # Routes for the PHOTO account:
 
   # READ 
 
@@ -66,7 +70,7 @@ Rails.application.routes.draw do
 
   # CREATE
 
-  get("/create_photo", { :controller => "photos", :action => "create" })
+  post("/create_photo", { :controller => "photos", :action => "create" })
 
   # UPDATE
 
