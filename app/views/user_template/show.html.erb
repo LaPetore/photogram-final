@@ -16,14 +16,28 @@
     <h4>Pending requests</h4>
     
     <% if @current_user != nil %>
-    <% x = FollowRequest.where({ :recipient_id => @current_user.id, status: "pending" }) %>
-      <% x.each do |a_request| %>
+    <% a = FollowRequest.where({ :recipient_id => @current_user.id, status: "pending" }) %>
+      <% a.each do |a_request| %>
         <ul>
           <li>
+            <% b = a_request.sender_id %>
+            <% c = User.where({ :id => b }) %>
+            <%= c.at(0).username %>
+            <form action="/modify_follow_request/<%= a_request.id %>" method="post">
+              <input type="hidden" name="query_status" value="accepted">
 
+              <button>Accept</button>
+            </form>
 
+            <form action="/modify_follow_request/<%= a_request.id %>" method="post">
+              <input type="hidden" name="query_status" value="rejected ">
+
+              <button>Rejected</button>
+            </form>
           </li>
         </ul>
+      <% end %>
+    <% end %>
 
     <form action="/insert_follow_request" method="post">
       <input type="hidden" name="query_sender_id" value="<%= @current_user.id %>">   
@@ -45,9 +59,5 @@
   <dd>
 
   </dd>
-
-
-  <% end %>
-  <% end %>
 
 </dl>
