@@ -12,18 +12,18 @@
     Followers
   </dt>
   <dd>
-    <% x = FollowRequest.where({ :recipient_id => @the_user.id }) %>
-    <%= x.count %>
+    <% a = FollowRequest.where({ :recipient_id => @the_user.id }) %>
+    <%= a.count %>
 
     <h4>Pending follow requests</h4>
     
     <% if @current_user != nil %>
-    <% a = FollowRequest.where({ :recipient_id => @current_user.id, status: "pending" }) %>
-      <% a.each do |a_request| %>
+    <% b = FollowRequest.where({ :recipient_id => @current_user.id, status: "pending" }) %>
+      <% b.each do |a_request| %>
         <ul>
           <li>
-            <% b = User.where({ :id => a_request.sender_id }) %>
-            <%= b.at(0).username %>
+            <% c = User.where({ :id => a_request.sender_id }) %>
+            <%= c.at(0).username %>
             <form action="/modify_follow_request/<%= a_request.id %>" method="post">
               <input type="hidden" name="query_status" value="accepted">
 
@@ -53,32 +53,35 @@
     Following
   </dt>
   <dd>
-    
+    <% d = FollowRequest.where({ :sender_id => @the_user.id }) %>
+    <%= d.count %>
   </dd>
 
-  <dt>
-    Edit user 
-  </dt>
-  <dd>
-    <form action="/update_user/<%= @the_user.id %>">
-      <label for="username_box">Username</label>
-      <input id="username_box" type="text" name="query_username">
+  <% if session.fetch(:user_id) == @the_user.id %>
+    <dt>
+      Edit user 
+    </dt>
+    <dd>
+      <form action="/update_user/<%= @the_user.id %>" method="post">
+        <label for="username_box">Username</label>
+        <input id="username_box" type="text" name="query_username">
 
-      <label for="private_box">Private?</label>
-      <input id="private_box" type="checkbox" name="query_private">
+        <label for="private_box">Private?</label>
+        <input id="private_box" type="checkbox" name="query_private">
 
-      <button>Update user</button>
-    </form>
-  </dd>
+        <button>Update user</button>
+      </form>
+    </dd>
+  <% end %>
 </dl>
 
 <ul>
   <li>
-    Profile
+    <a href="/users/<%= @the_user.username %>">Profile</a>
   </li>
   
   <li>
-    Liked photos
+    <a href="/users/<%= @the_user.username %>/liked_photos">Liked photos</a>
   </li>
     
   <li>
@@ -90,3 +93,48 @@
   </li>
 
 </ul>
+
+
+<% e = Photo.where({ :owner_id => @the_user.id }) %>
+<h2>Own photos (<%= e.count %>) </h2>
+
+<table border="1">
+  <tr>
+    <th>Image</th>
+    <th>Owner</th>
+    <th>Caption</th>
+    <th>Posted</th>
+    <th>Likes</th>
+    <th></th>
+  </tr>
+
+  <% e.each do |a_photo| %>
+  <tr>
+    <td>
+      
+      <img src="<%= a_photo.image %>">
+    </td>
+
+    <td>
+      <%= @the_user.username %>
+    </td>
+
+    <td>
+      <%= a_photo.caption %>
+    </td>
+
+    <td>
+      <%= time_ago_in_words(a_photo.created_at) %>
+    </td>
+
+    <td>
+      <%= a_photo.likes_count %>
+    </td>
+
+    <td>
+      <a href="/photos/<%= a_photo.id %>">Show details</a>
+    </td>
+
+  </tr>
+  <% end %>
+</table>
