@@ -1,21 +1,21 @@
 <h1><%= @the_user.username %></h1>
 
 <dl>
-  <th>
+  <dt>
     Private
-  </th>
+  </dt>
   <dd>
     <%= @the_user.private %>
   </dd>
 
-  <th>
+  <dt>
     Followers
-  </th>
+  </dt>
   <dd>
     <% x = FollowRequest.where({ :recipient_id => @the_user.id }) %>
     <%= x.count %>
 
-    <h4>Pending requests</h4>
+    <h4>Pending follow requests</h4>
     
     <% if @current_user != nil %>
     <% a = FollowRequest.where({ :recipient_id => @current_user.id, status: "pending" }) %>
@@ -49,11 +49,44 @@
     </form>
   </dd>
 
-  <th>
+  <dt>
     Following
-  </th>
+  </dt>
   <dd>
-
+    
   </dd>
 
+  <dt>
+    Edit user 
+  </dt>
+  <dd>
+    <form action="/update_user/<%= @the_user.id %>">
+      <label for="username_box">Username</label>
+      <input id="username_box" type="text" name="query_username">
+
+      <label for="private_box">Private?</label>
+      <input id="private_box" type="checkbox" name="query_private">
+
+      <button>Update user</button>
+    </form>
+  </dd>
 </dl>
+
+<ul>
+  <li>
+    Profile
+  </li>
+  
+  <li>
+    Liked photos
+  </li>
+    
+  <li>
+    Feed
+  </li>
+    
+  <li>
+    Discover
+  </li>
+
+</ul>
