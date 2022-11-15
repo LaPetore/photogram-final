@@ -12,6 +12,8 @@
     Followers
   </th>
   <dd>
+    <% x = FollowRequest.where({ :recipient_id => @the_user.id }) %>
+    <%= x.count %>
 
     <h4>Pending requests</h4>
     
@@ -20,9 +22,8 @@
       <% a.each do |a_request| %>
         <ul>
           <li>
-            <% b = a_request.sender_id %>
-            <% c = User.where({ :id => b }) %>
-            <%= c.at(0).username %>
+            <% b = User.where({ :id => a_request.sender_id }) %>
+            <%= b.at(0).username %>
             <form action="/modify_follow_request/<%= a_request.id %>" method="post">
               <input type="hidden" name="query_status" value="accepted">
 
@@ -30,7 +31,7 @@
             </form>
 
             <form action="/modify_follow_request/<%= a_request.id %>" method="post">
-              <input type="hidden" name="query_status" value="rejected ">
+              <input type="hidden" name="query_status" value="rejected">
 
               <button>Rejected</button>
             </form>
@@ -42,11 +43,6 @@
     <form action="/insert_follow_request" method="post">
       <input type="hidden" name="query_sender_id" value="<%= @current_user.id %>">   
       <input type="hidden" name="query_recipient_id" value="<%= @the_user.id %>">   
-
-      
-        <input type="hidden" name="query_status" value="pending">
-      
-        <input type="hidden" name="query_status" value="accepted">
       
       
       <button>Follow</button>
