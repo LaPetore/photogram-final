@@ -18,6 +18,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def show_liked_photos
+    the_username = params.fetch("path_username")
+    matching_users = User.where({ :username => the_username })
+    @the_user = matching_users.at(0)
+
+    render({ :template => "/user_template/show_liked_photos.html.erb" })
+  end
+
+  
+
   def update 
     the_id = params.fetch("path_username")
     the_user = User.where({ :id => the_id })
