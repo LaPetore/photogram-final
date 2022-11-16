@@ -15,11 +15,11 @@
     <% a = FollowRequest.where({ :recipient_id => @the_user.id }) %>
     <%= a.count %>
 
-    <h4>Pending follow requests</h4>
-    
     <% if @current_user != nil %>
     <% b = FollowRequest.where({ :recipient_id => @current_user.id, status: "pending" }) %>
       <% b.each do |a_request| %>
+        <h4>Pending follow requests</h4> 
+        
         <ul>
           <li>
             <% c = User.where({ :id => a_request.sender_id }) %>
@@ -40,13 +40,16 @@
       <% end %>
     <% end %>
 
+
+    <% if @the_user.username != @current_user.username %>
+
     <form action="/insert_follow_request" method="post">
       <input type="hidden" name="query_sender_id" value="<%= @current_user.id %>">   
       <input type="hidden" name="query_recipient_id" value="<%= @the_user.id %>">   
       
-      
       <button>Follow</button>
     </form>
+    <% end %>
   </dd>
 
   <dt>
