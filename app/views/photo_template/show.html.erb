@@ -50,9 +50,14 @@
   <dt>
     Fans 
   </dt>
-  <dd>
-    (list of people later)
-  </dd>
+
+  <% d = Like.where({ :photo_id => @the_photo.id }) %>
+  <% d.each do |a_like| %>
+    <dd>
+      <% e = User.where({ :id => a_like.fan_id }) %>
+      <%= e.at(0).username %>
+    </dd>
+  <% end %>
 
   <dt>
     Add a fan

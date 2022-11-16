@@ -8,8 +8,10 @@ class UsersController < ApplicationController
 
   def show
     if session.fetch(:user_id) != nil
+      
       the_username = params.fetch("path_username")
       matching_users = User.where({ :username => the_username })
+     ## @current_user = User.where({ :id => session.fetch(:user_id) })
       @the_user = matching_users.at(0)
 
       render({ :template => "/user_template/show.html.erb" })

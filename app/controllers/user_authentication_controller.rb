@@ -18,7 +18,7 @@ class UserAuthenticationController < ApplicationController
         redirect_to("/user_sign_in", { :alert => "Incorrect password." })
       else
         session[:user_id] = user.id
-      
+        @current_user = User.where({ :id => session.fetch(:user_id) })
         redirect_to("/", { :notice => "Signed in successfully." })
       end
     else
