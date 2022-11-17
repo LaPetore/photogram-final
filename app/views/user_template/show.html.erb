@@ -17,9 +17,10 @@
 
     <% if @current_user != nil %>
     <% b = FollowRequest.where({ :recipient_id => @current_user.id, status: "pending" }) %>
+      <h4>Pending follow requests</h4> 
       <% b.each do |a_request| %>
-        <h4>Pending follow requests</h4> 
         
+
         <ul>
           <li>
             <% c = User.where({ :id => a_request.sender_id }) %>
@@ -88,7 +89,7 @@
   </li>
     
   <li>
-    Feed
+    <a href="/users/<%= @the_user.username %>/feed">Feed</a>
   </li>
     
   <li>

@@ -95,8 +95,9 @@
 </ul>
 
 
-<% e = Like.where({ :fan_id => @the_user.id })%>
-<h2>Liked photos (<%= e.count %>) </h2>
+<%= e = FollowRequest.where({ :sender_id => @the_user.id })%>
+<%= f = Photo.where({ :owner_id => e }) %>
+<h2>Feed () </h2>
 
 <table border="1">
   <tr>
@@ -107,36 +108,3 @@
     <th>Likes</th>
     <th></th>
   </tr>
-
-  <% e.each do |a_like| %>
-  <% f = Photo.where({ :id => a_like.photo_id }).at(0) %>
-  <tr>
-    <td>
-      <img src="<%= f.image %>">
-    </td>
-
-    <td>
-      <% g = User.where({ :id => f.owner_id }) %>
-      <%= g.at(0).username  %>
-    </td>
-
-    <td>
-      <%= f.caption %>
-    </td>
-
-    <td>
-      <%= time_ago_in_words(f.created_at) %>
-    </td>
-
-    <td>
-      <%= f.likes_count %>
-    </td>
-
-    <td>
-      <a href="/photos/<%= f.id %>">Show details</a>
-    </td>
-
-  </tr>
-  <% end %>
-  
-</table>
