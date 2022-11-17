@@ -43,6 +43,16 @@ class UsersController < ApplicationController
     matching_users = User.where({ :username => the_username })
     @the_user = matching_users.at(0)
 
+    e = FollowRequest.where({ :status => "accepted", :sender_id => @the_user.id })
+    @photos = [];
+    e.each do |a_request|
+      g = Photo.where({ :owner_id => a_request.recipient_id })
+      g.each do |photo|
+        @photos.push(photo)
+      end
+
+    end
+
     render({ :template => "/user_template/show_feed.html.erb" })
   end
 
