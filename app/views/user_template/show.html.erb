@@ -42,15 +42,22 @@
     <% end %>
 
 
-    <% if @the_user.username != @current_user.username %>
-
-    <form action="/insert_follow_request" method="post">
-      <input type="hidden" name="query_sender_id" value="<%= @current_user.id %>">   
-      <input type="hidden" name="query_recipient_id" value="<%= @the_user.id %>">   
-      
-      <button>Follow</button>
-    </form>
-    <% end %>
+    <% d = FollowRequest.where({ :recipient_id => @the_user.id, :sender_id => @current_user.id , status: "accepted" }) %>
+      <% the_following_request_accepted = d.at(0) %>
+        
+      <% if the_following_request_accepted == nil %> 
+        <form action="/insert_follow_request" method="post">
+          <input type="hidden" name="query_sender_id" value="<%= @current_user.id %>">   
+          <input type="hidden" name="query_recipient_id" value="<%= @the_user.id %>">   
+          
+          <button>Follow</button>
+        </form>
+        
+      <% else %>
+        <div>
+          <a href="/delete_follow_request/<%= the_following_request_accepted.id %>">Unfollow</a>
+        </div>
+      <% end %>
   </dd>
 
   <dt>
