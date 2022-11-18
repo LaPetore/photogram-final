@@ -57,18 +57,18 @@ class UsersController < ApplicationController
   end
 
   def update 
-    the_id = params.fetch("path_username")
-    the_user = User.where({ :id => the_id })
+    the_username = params.fetch("path_username")
+    the_user = User.where({ :username => the_username }).at(0)
 
     the_user.username = params.fetch("query_username")
-    the_user.private = params.fetch("query_private")
+    the_user.private = params.fetch("query_private", false)
 
     if the_user.valid?
       the_user.save 
 
-      redirect_to("/users/:path_username", { :notice => "User successfully updated." })
+      redirect_to("/users/#{the_user.username}", { :notice => "User successfully updated." })
     else
-      redirect_to("/users/:path_username", { :alert => "User failed to update." })
+      redirect_to("/users/#{the_user.username}", { :alert => "User failed to update." })
     end
   end
 

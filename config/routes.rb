@@ -45,6 +45,10 @@ Rails.application.routes.draw do
 
   get("/users/:path_username/feed", { :controller => "users", :action => "show_feed" })
 
+  # UPDATE 
+
+  post("/update_user/:path_username", { :controller => "users", :action => "update" })
+
   # SIGN UP FORM
   get("/user_sign_up", { :controller => "user_authentication", :action => "sign_up_form" })        
   # CREATE RECORD
@@ -52,6 +56,7 @@ Rails.application.routes.draw do
       
   # EDIT PROFILE FORM        
   get("/edit_user_profile", { :controller => "user_authentication", :action => "edit_profile_form" })       
+
   # UPDATE RECORD
   post("/modify_user", { :controller => "user_authentication", :action => "update" })
   
