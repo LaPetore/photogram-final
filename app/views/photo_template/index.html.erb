@@ -1,7 +1,7 @@
 <h1>List of photos</h1>
 
 <% if session.fetch(:user_id) != nil %>
-  <form action="/create_photo" method="post">
+  <form action="/create_photo" method="post" enctype="multipart/form-data">
     <label for="image_box">Image</label>
     <input id="image_box" type="file" name="query_image">
 
