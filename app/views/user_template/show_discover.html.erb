@@ -111,23 +111,24 @@
     </td>
 
     <td>
-
+      <% i = User.where({ :id => a_photo.owner_id }) %>
+      <%= i.at(0).username %>
     </td>
 
     <td>
-
+      <%= a_photo.caption %>
     </td>
 
     <td>
-
+      <%= time_ago_in_words(a_photo.created_at) %> ago
     </td>
 
     <td>
-
+      <%= a_photo.likes_count %>
     </td>
 
     <td>
-
+      <a href="/photos/<%= a_photo.id %>">Show details</a>
     </td>
 
   </tr>
