@@ -107,17 +107,14 @@
     <th></th>
   </tr>
 
-  <%= @photos.count %>
-
-  
-
   <% @photos.each do |a_photo| %>
   <tr>  
     <td>
       <img src="<%= a_photo.image %>">
     </td>
     <td>
-      <%= a_photo.owner_id %>
+      <% h = User.where({ :id => a_photo.owner_id }) %>
+      <%= h.at(0).username %>
     </td>
     <td>
       <%= a_photo.caption %>
