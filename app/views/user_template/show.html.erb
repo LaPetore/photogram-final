@@ -75,10 +75,10 @@
     <dd>
       <form action="/update_user/<%= @the_user.username %>" method="post">
         <label for="username_box">Username</label>
-        <input id="username_box" type="text" name="query_username">
+        <input id="username_box" type="text" name="query_username" value="<%= @the_user.username %>">
 
         <label for="private_box">Private?</label>
-        <input id="private_box" type="checkbox" name="query_private">
+        <input id="private_box" type="checkbox" name="query_private" value="<%= @the_user.private %>">
 
         <button>Update user</button>
       </form>
