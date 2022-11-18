@@ -18,7 +18,7 @@ class PhotosController < ApplicationController
     end
   end
 
-  def create
+  def create 
     the_photo = Photo.new
     the_photo.image = params.fetch("query_image")
     the_photo.caption = params.fetch("query_caption")

@@ -8,6 +8,8 @@
     <label for="caption_box">Caption</label>
     <textarea id="caption_box" type="text" name="query_caption" placeholder="Enter a caption for the photo..."></textarea>
 
+    <input type="hidden" name="query_owner_id" value="<%= @current_user.id %>">
+
     <button>Add photo</button>
   </form>
 <% end %>
