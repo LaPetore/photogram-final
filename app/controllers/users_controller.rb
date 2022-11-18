@@ -66,6 +66,7 @@ class UsersController < ApplicationController
     e.each do |a_request|
       g = Like.where({ :fan_id => a_request.recipient_id }) 
       g.each do |a_like|
+        h = Photo.where({ :id => a_like.photo_id })
         @photos.push(a_like.photo_id)
         
       end   
