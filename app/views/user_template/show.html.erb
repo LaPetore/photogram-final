@@ -17,10 +17,10 @@
 
     <% if @current_user != nil %>
     <% b = FollowRequest.where({ :recipient_id => @current_user.id, status: "pending" }) %>
-      <h4>Pending follow requests</h4> 
+      
       <% b.each do |a_request| %>
         
-
+        <h4>Pending follow requests</h4> 
         <ul>
           <li>
             <% c = User.where({ :id => a_request.sender_id }) %>
@@ -127,7 +127,7 @@
     </td>
 
     <td>
-      <%= time_ago_in_words(a_photo.created_at) %>
+      <%= time_ago_in_words(a_photo.created_at) %> ago
     </td>
 
     <td>
