@@ -56,6 +56,18 @@ class UsersController < ApplicationController
     render({ :template => "/user_template/show_feed.html.erb" })
   end
 
+  def show_discover
+    the_username = params.fetch("path_username")
+    matching_users = User.where({ :username => the_username })
+    @the_user = matching_users.at(0)
+
+    
+
+    render({ :template => "/user_template/show_discover.html.erb" })
+  end
+
+  
+
   def update 
     the_username = params.fetch("path_username")
     the_user = User.where({ :username => the_username }).at(0)

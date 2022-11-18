@@ -45,6 +45,8 @@ Rails.application.routes.draw do
 
   get("/users/:path_username/feed", { :controller => "users", :action => "show_feed" })
 
+  get("/users/:path_username/discover", { :controller => "users", :action => "show_discover" })
+
   # UPDATE 
 
   post("/update_user/:path_username", { :controller => "users", :action => "update" })
