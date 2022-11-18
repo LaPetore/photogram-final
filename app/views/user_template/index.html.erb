@@ -26,17 +26,12 @@
         <% if session.fetch(:user_id) != nil %>
           <% a = FollowRequest.where({ :recipient_id => a_user.id, :sender_id => @current_user.id , status: "pending" }) %>
           <% the_following_request = a.at(0) %>
-        
-          <% if the_following_request != nil && the_following_request.status=="pending" %> 
-            Request sent. <a href="/delete_follow_request/<%= the_following_request.id %>">Cancel</a>
-            
-          <% elsif the_following_request != nil  && the_following_request.status=="accepted" %>
-            <form action="/insert_follow_request" method="post">
-              <input type="hidden" name="query_recipient_id" value="<%= a_user.id %>">
-              <input type="hidden" name="query_sender_id" value="<%= @current_user.id %>">
 
-              <button>UnFollow1</button>
-            </form>
+          <% b = FollowRequest.where({ :recipient_id => a_user.id, :sender_id => @current_user.id , status: "accepted" }) %>
+          <% the_following_request_accepted = b.at(0) %>
+        
+          <% if the_following_request != nil %> 
+            Request sent. <a href="/delete_follow_request/<%= the_following_request.id %>">Cancel</a>
 
           <% elsif the_following_request == nil && a_user.private == true %>
 
@@ -47,20 +42,19 @@
              
               <button>Follow2</button>
             </form>
-          <% else %> <%# the_following_request == nil && a_user.private == false %>
+          <% elsif the_following_request_accepted == nil && a_user.private == false %>
            <form action="/insert_follow_request" method="post">
               <input type="hidden" name="query_recipient_id" value="<%= a_user.id %>">
               <input type="hidden" name="query_sender_id" value="<%= @current_user.id %>">
               <button>Follow3</button>
             </form>
           
-          <% end%>
+          
 
-          <% b = FollowRequest.where({ :recipient_id => a_user.id, :sender_id => @current_user.id , status: "accepted" }) %>
-          <% the_following_request = b.at(0) %>
+          
 
-          <% if the_following_request != nil && the_following_request.status == "accepted" %>
-            <a href="/delete_follow_request/<%= the_following_request.id %>">Unfollow</a>
+          <% elsif the_following_request_accepted != nil %>
+            <a href="/delete_follow_request/<%= the_following_request_accepted.id %>">Unfollow</a>
 
           <% end %>
 
