@@ -64,13 +64,12 @@ class UsersController < ApplicationController
     e = FollowRequest.where({ :status => "accepted", :sender_id => @the_user.id })
     @photos = [];
     e.each do |a_request|
-      g = Like.where({ :fan_id => :recipient_id }) 
-      h = Photo.where({ :owner_id => a_request.recipient_id })
-      h.each do |a_photo|
-        @photos.push(a_photo) 
-      end
+      g = Like.where({ :fan_id => a_request.recipient_id }) 
+      g.each do |a_like|
+        @photos.push(a_like.photo_id)
+        
+      end   
     end
-
 
     render({ :template => "/user_template/show_discover.html.erb" })
   end
