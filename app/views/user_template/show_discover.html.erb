@@ -46,8 +46,8 @@
     Following
   </dt>
   <dd>
-    <% e = FollowRequest.where({ :sender_id => @the_user.id }) %>
-    <%= e.count %>
+    <% d = FollowRequest.where({ :sender_id => @the_user.id }) %>
+    <%= d.count %>
   </dd>
 
   <% if session.fetch(:user_id) == @the_user.id %>
@@ -86,3 +86,50 @@
   </li>
 
 </ul>
+
+
+
+
+
+<h2>Discovery (<%= @photos.count %>)</h2>
+
+<table border="1">
+  <tr>
+    <th>Image</th>
+    <th>Owner</th>
+    <th>Caption</th>
+    <th>Posted</th>
+    <th>Likes</th>
+    <th></th>
+  </tr>
+
+
+
+  <tr>
+    <td>
+
+    </td>
+
+    <td>
+
+    </td>
+
+    <td>
+
+    </td>
+
+    <td>
+
+    </td>
+
+    <td>
+
+    </td>
+
+    <td>
+
+    </td>
+
+  </tr>
+
+</table>

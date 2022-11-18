@@ -47,8 +47,8 @@ class UsersController < ApplicationController
     @photos = [];
     e.each do |a_request|
       g = Photo.where({ :owner_id => a_request.recipient_id })
-      g.each do |photo|
-        @photos.push(photo)
+      g.each do |a_photo|
+        @photos.push(a_photo)
       end
 
     end
@@ -61,13 +61,21 @@ class UsersController < ApplicationController
     matching_users = User.where({ :username => the_username })
     @the_user = matching_users.at(0)
 
-    
+    e = FollowRequest.where({ :status => "accepted", :sender_id => @the_user.id })
+    @photos = [];
+    e.each do |a_request|
+      g = Like.where({ :fan_id => :recipient_id }) 
+      h = Photo.where({ :owner_id => a_request.recipient_id })
+      h.each do |a_photo|
+        @photos.push(a_photo) 
+      end
+    end
+
 
     render({ :template => "/user_template/show_discover.html.erb" })
   end
 
   
-
   def update 
     the_username = params.fetch("path_username")
     the_user = User.where({ :username => the_username }).at(0)
